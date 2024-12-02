@@ -37,8 +37,8 @@ def less_safe(list):
             tempList.pop(index)
             if safe(tempList):
                 return True
-            else:
-                return False
+    
+    return False
 
 less_safe_lists = [less_safe(list) for list in diff_lists]
 
