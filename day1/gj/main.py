@@ -29,5 +29,4 @@ similarity = []
 for number in list_one:
     similarity.append(number * list_two.count(number))
 
-
 print(sum(similarity), "<< part 2")
