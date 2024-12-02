@@ -43,3 +43,5 @@ def less_safe(list):
 less_safe_lists = [less_safe(list) for list in diff_lists]
 
 print(less_safe_lists.count(True), "<< part 2")
+
+##I'm not sure what I did wrong on part 2, and I can't see it. Feedback appreciated
