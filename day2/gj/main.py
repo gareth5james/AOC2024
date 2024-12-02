@@ -15,9 +15,7 @@ diff_lists = [running_diff([int(num) for num in line.strip().split()]) for line 
 def safe(list):
     if any(item == 0 for item in list):
         return False
-    elif any(item > 3 for item in list):
-        return False
-    elif any(item < -3 for item in list):
+    elif any(abs(item) > 3 for item in list):
         return False
     elif all(item > 0 for item in list):
         return True
