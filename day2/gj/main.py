@@ -1,27 +1,52 @@
-#prep
-
 reports = open("input.txt", "r")
 
-def running_diff(line):
-    if len(line) <= 1:
-        return []
-    else:
-        return [line[1] - line[0]] + running_diff(line[1:])
+def analyze(line):
+    ascending = True
+    success = True
+    
+    for i in range(len(line) - 1):
+        num = line[i]
+        num2 = line[i + 1]
+        if i == 0:
+            if num > num2:
+                ascending = False
 
-diff_lists = [running_diff([int(num) for num in line.strip().split()]) for line in reports]
+        if num == num2:
+            success = False
+            break
+        
+        if ascending:
+            if num > num2 or (num2 - num) > 3:
+                success = False
+                break
+        else:
+            if num < num2 or (num - num2) > 3:
+                success = False
+    
+    return success
 
-#Part 1
+#part1
 
-def safe(line):
-    if any(num == 0 for num in line):
-        return False
-    elif any(abs(num) > 3 for num in line):
-        return False
-    elif all(num > 0 for num in line) or all(num < 0 for num in line):
+fails_per_report = [analyze([int(num) for num in line.strip().split()]) for line in reports]
+
+print(fails_per_report.count(True), "<< part 1")
+
+#part2
+
+def loss_prevention(line):
+    if analyze(line):
         return True
     else:
-        return False
+        for index, num in enumerate(line):
+            tempLine = line[:]
+            tempLine.pop(index)
+            if analyze(tempLine):
+                return True
     
-safe_lists = [safe(line) for line in diff_lists]
+    return False
 
-print(safe_lists.count(True), "<< part 1")
+reports2 = open("input.txt", "r")
+
+saved_fails_per_report = [loss_prevention([int(num) for num in line.strip().split()]) for line in reports2]
+
+print(saved_fails_per_report.count(True), "<< part 2")
