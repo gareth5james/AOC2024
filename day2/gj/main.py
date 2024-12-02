@@ -17,9 +17,7 @@ def safe(list):
         return False
     elif any(abs(item) > 3 for item in list):
         return False
-    elif all(item > 0 for item in list):
-        return True
-    elif all(item < 0 for item in list):
+    elif all(item > 0 for item in list) or all(item < 0 for item in list):
         return True
     else:
         return False
