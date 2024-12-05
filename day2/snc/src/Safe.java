@@ -37,7 +37,12 @@ public class Safe {
     }
 
     static boolean isSafe(Integer[] arr) {
+        return isSafeDampened(arr, 0);
+    }
 
+    static boolean isSafeDampened(Integer[] arr, Integer dampener) {
+
+        int faults = 0;
         boolean alwaysPositive = false;
 
         for (int i = 1; i < arr.length; i++) {
@@ -45,11 +50,12 @@ public class Safe {
 
             if (i == 1)
                 alwaysPositive = isPositive;
-            else if(alwaysPositive != isPositive)
-                return false;
 
             int diff = abs(arr[i] - arr[i - 1]);
-            if (diff == 0 || diff > 3)
+            if (diff == 0 || diff > 3 || (alwaysPositive != isPositive && i > 1))
+                faults++;
+
+            if (faults > dampener)
                 return false;
         }
 

@@ -21,4 +21,12 @@ public class SafeTest {
         assertEquals(1, Safe.countSafe(new Integer[][]{{1, 2, 3}, {4, 5, 10, 11}}));
         assertEquals(2, Safe.countSafe(new Integer[][]{{1, 2, 3}, {4, 5, 10, 11}, {965, 964, 962, 960}}));
     }
+
+    @Test
+    void isSafeDampener() {
+        assertTrue(Safe.isSafeDampened(new Integer[]{1, 2, 3}, 1));
+        assertTrue(Safe.isSafeDampened(new Integer[]{1, 2, 3, 2, 4}, 1));
+        assertTrue(Safe.isSafeDampened(new Integer[]{965, 964, 962, 963}, 1));
+        assertFalse(Safe.isSafeDampened(new Integer[]{965, 964, 962, 963, 963, 962}, 1));
+    }
 }
