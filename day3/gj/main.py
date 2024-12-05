@@ -1,28 +1,13 @@
-import re
+total1 = total2 = 0
+    enabled = True
+    data = open("input.txt").read()
 
-# test input
-def test():
-    calc_list = [[int(num) for num in re.compile(r"(\d+)").findall(calc)] for calc in re.compile(r"(mul\(\d+,\d+\))").findall(open("input-test.txt", "r").read())]
+    for a, b, do, dont in findall(r"mul\((\d+),(\d+)\)|(do\(\))|(don't\(\))", data):
+        if do or dont:
+            enabled = bool(do)
+        else:
+            x = int(a) * int(b)
+            total1 += x
+            total2 += x * enabled
 
-    sum_list = []
-
-    for calc in calc_list:
-        sum_list.append(calc[0] * calc[1])
-
-    print(sum(sum_list))
-
-test()
-
-#part 1
-
-def part1():
-    calc_list = [[int(num) for num in re.compile(r"(\d+)").findall(calc)] for calc in re.compile(r"(mul\(\d+,\d+\))").findall(open("input.txt", "r").read())]
-
-    sum_list = []
-
-    for calc in calc_list:
-        sum_list.append(calc[0] * calc[1])
-
-    print(sum(sum_list))
-
-part1()  
+    print(total1, total2)
