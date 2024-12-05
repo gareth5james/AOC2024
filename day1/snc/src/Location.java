@@ -3,10 +3,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
-public class Distance {
+public class Location {
 
     public static void main() {
         Path path = Paths.get("day1/snc/input.txt");
@@ -41,5 +43,11 @@ public class Distance {
             total += abs(arr1[i] - arr2[i]);
         }
         return total;
+    }
+
+    static Integer findOccurrence(Integer num, Integer[] arr) {
+        return Arrays.stream(arr)
+                .filter(n -> Objects.equals(n, num))
+                .toList().toArray(new Integer[0]).length;
     }
 }
