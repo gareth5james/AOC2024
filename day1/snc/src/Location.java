@@ -50,4 +50,12 @@ public class Location {
                 .filter(n -> Objects.equals(n, num))
                 .toList().toArray(new Integer[0]).length;
     }
+
+    static Integer similarityScore(Integer[] arr1, Integer[] arr2) {
+        int total = 0;
+        for (Integer integer : arr1) {
+            total += integer * findOccurrence(integer, arr2);
+        }
+        return total;
+    }
 }

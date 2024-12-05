@@ -28,4 +28,9 @@ class LocationTest {
         assertEquals(0, Location.findOccurrence(5, new Integer[]{4, 3, 4, 14}));
         assertEquals(4, Location.findOccurrence(100, new Integer[]{100, 100, 3, 4, 100, 75, 100, 99}));
     }
+
+    @Test
+    void similarityScore() {
+        assertEquals(14, Location.similarityScore(new Integer[]{4, 3, 1, 3}, new Integer[]{4, 3, 4, 14}));
+    }
 }
