@@ -20,4 +20,13 @@ public class Safe {
 
         return true;
     }
+
+    static Integer countSafe(Integer[][] nestedArr) {
+        int count = 0;
+        for (Integer[] arr: nestedArr) {
+            if (isSafe(arr))
+                count++;
+        }
+        return count;
+    }
 }

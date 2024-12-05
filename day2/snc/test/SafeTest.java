@@ -14,4 +14,11 @@ public class SafeTest {
         assertTrue(Safe.isSafe(new Integer[]{965, 964, 962, 960}));
         assertFalse(Safe.isSafe(new Integer[]{965, 964, 962, 963}));
     }
+
+    @Test
+    void countSafe() {
+        assertEquals(1, Safe.countSafe(new Integer[][]{{1, 2, 3}}));
+        assertEquals(1, Safe.countSafe(new Integer[][]{{1, 2, 3}, {4, 5, 10, 11}}));
+        assertEquals(2, Safe.countSafe(new Integer[][]{{1, 2, 3}, {4, 5, 10, 11}, {965, 964, 962, 960}}));
+    }
 }
