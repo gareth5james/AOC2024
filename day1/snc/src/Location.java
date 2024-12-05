@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
@@ -13,7 +12,7 @@ public class Location {
     public static void main() {
         Path path = Paths.get("day1/snc/input.txt");
 
-        // Part 1
+
         try {
             String[] lines = Files.readAllLines(path).toArray(new String[0]);
             Integer[] array1 = new Integer[lines.length];
@@ -25,9 +24,14 @@ public class Location {
                 array2[i] = Integer.parseInt(numbers[1]);
             }
 
-            Integer result = findDistance(array1, array2);
+            // Part 1
+            Integer result1 = findDistance(array1, array2);
+            System.out.println("Part 1: " + result1);
 
-            System.out.println(result);
+            // Part 2
+            Integer result2 = similarityScore(array1, array2);
+            System.out.println("Part 2: " + result2);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
