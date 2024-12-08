@@ -24,9 +24,9 @@ public class SafeTest {
 
     @Test
     void isSafeDampener() {
-        assertTrue(Safe.isSafeDampened(new Integer[]{1, 2, 3}, 1));
-        assertTrue(Safe.isSafeDampened(new Integer[]{1, 2, 3, 2, 4}, 1));
-        assertTrue(Safe.isSafeDampened(new Integer[]{965, 964, 962, 963}, 1));
-        assertFalse(Safe.isSafeDampened(new Integer[]{965, 964, 962, 963, 963, 962}, 1));
+        assertTrue(Safe.isSafeDampened(new Integer[]{1, 2, 3}));
+        assertTrue(Safe.isSafeDampened(new Integer[]{1, 2, 3, 2, 4}));
+        assertTrue(Safe.isSafeDampened(new Integer[]{965, 964, 962, 963}));
+        assertFalse(Safe.isSafeDampened(new Integer[]{965, 964, 962, 963, 963, 962}));
     }
 }

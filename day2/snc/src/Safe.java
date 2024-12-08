@@ -14,6 +14,7 @@ public class Safe {
             String[] lines = Files.readAllLines(path).toArray(new String[0]);
 
             int result1 = 0;
+            int result2 = 0;
 
             for (String line : lines) {
                 String[] numberStr = line.split(" ");
@@ -25,10 +26,16 @@ public class Safe {
 
                 if (isSafe(numbers))
                     result1++;
+
+                if (isSafeDampened(numbers))
+                    result2++;
             }
 
             // Part 1
             System.out.println("Part 1: " + result1);
+
+            // Part 2
+            System.out.println("Part 2: " + result2);
 
 
         } catch (IOException e) {
@@ -37,12 +44,6 @@ public class Safe {
     }
 
     static boolean isSafe(Integer[] arr) {
-        return isSafeDampened(arr, 0);
-    }
-
-    static boolean isSafeDampened(Integer[] arr, Integer dampener) {
-
-        int faults = 0;
         boolean alwaysPositive = false;
 
         for (int i = 1; i < arr.length; i++) {
@@ -52,14 +53,33 @@ public class Safe {
                 alwaysPositive = isPositive;
 
             int diff = abs(arr[i] - arr[i - 1]);
+            System.out.println(i);
             if (diff == 0 || diff > 3 || (alwaysPositive != isPositive && i > 1))
-                faults++;
-
-            if (faults > dampener)
                 return false;
         }
 
         return true;
+    }
+
+    static boolean isSafeDampened(Integer[] arr) {
+
+        for (int i = 0; i < arr.length; i++) {
+            Integer[] newArr = new Integer[arr.length - 1];
+
+            int k = 0;
+
+            for (int j = 0; j < arr.length; j++) {
+                if (j != i) {
+                    newArr[k] = arr[j];
+                    k++;
+                }
+            }
+
+            if (isSafe(newArr))
+                return true;
+        }
+
+        return false;
     }
 
     static Integer countSafe(Integer[][] nestedArr) {
