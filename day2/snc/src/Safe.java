@@ -53,7 +53,6 @@ public class Safe {
                 alwaysPositive = isPositive;
 
             int diff = abs(arr[i] - arr[i - 1]);
-            System.out.println(i);
             if (diff == 0 || diff > 3 || (alwaysPositive != isPositive && i > 1))
                 return false;
         }
