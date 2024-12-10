@@ -18,6 +18,10 @@ public class WordSearch {
             Integer result1 = findXmas(lines);
             System.out.println("Part 1: " + result1);
 
+            // Part 2
+            Integer result2 = findCross(lines);
+            System.out.println("Part 2: " + result2);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -73,6 +77,24 @@ public class WordSearch {
                     if (j >= word.length() - 1) {
                         count += isWord(i, j, 0, -1, arr);
                     }
+                }
+            }
+        }
+
+        return count;
+    }
+
+    static Integer findCross (String[] arr) {
+        int count = 0;
+        for (int i = 1; i < arr.length - 1; i++) {
+            for (int j = 1; j < arr[0].length() - 1; j++) {
+                if (arr[i].charAt(j) == 'A' &&
+                        (((arr[i - 1].charAt(j - 1) == 'M' && arr[i + 1].charAt(j + 1) == 'S') ||
+                            (arr[i - 1].charAt(j - 1) == 'S' && arr[i + 1].charAt(j + 1) == 'M')) &&
+                            ((arr[i + 1].charAt(j - 1) == 'M' && arr[i - 1].charAt(j + 1) == 'S') ||
+                            (arr[i + 1].charAt(j - 1) == 'S' && arr[i - 1].charAt(j + 1) == 'M')))) {
+
+                    count++;
                 }
             }
         }

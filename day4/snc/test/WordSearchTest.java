@@ -20,4 +20,14 @@ public class WordSearchTest {
                 "MSAMASMSMX", "XMASAMXAMM", "XXAMMXXAMA", "SMSMSASXSS", "SAXAMASAAA", "MAMMMXMMMM", "MXMXAXMASX"}));
     }
 
+    @Test
+    void findCross() {
+        assertEquals(1, WordSearch.findCross(new String[]{"M.S", ".A.", "M.S"}));
+    }
+
+    @Test
+    void findCross2() {
+        assertEquals(9, WordSearch.findCross(new String[]{"MMMSXXMASM", "MSAMXMSMSA", "AMXSXMAAMM",
+                "MSAMASMSMX", "XMASAMXAMM", "XXAMMXXAMA", "SMSMSASXSS", "SAXAMASAAA", "MAMMMXMMMM", "MXMXAXMASX"}));
+    }
 }
