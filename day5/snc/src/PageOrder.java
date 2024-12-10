@@ -1,7 +1,33 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class PageOrder {
+
+    public static void main() {
+        Path path = Paths.get("day5/snc/input.txt");
+        Path path2 = Paths.get("day5/snc/rules.txt");
+
+        try {
+            String[] lines = Files.readAllLines(path).toArray(new String[0]);
+            String[] rules = Files.readAllLines(path2).toArray(new String[0]);
+
+            int result1 = 0;
+
+            for (String line: lines)
+                result1 += findMiddle(rules, line);
+
+            // Part 1
+            System.out.println("Part 1: " + result1);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     static int findIndex (String ruleNum, String[] pageNum) {
         return IntStream.range(0, pageNum.length)
