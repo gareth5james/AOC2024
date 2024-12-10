@@ -17,4 +17,18 @@ public class PageOrderTest {
 
         assertEquals(53, PageOrder.findMiddle(rules, pages));
     }
+
+    @Test
+    void findMiddle2() {
+
+        String[] rules = new String[] {
+                "47|53",
+                "31|53",
+                "97|61"
+        };
+
+        String pages = "47,97,53,31,61";
+
+        assertEquals(0, PageOrder.findMiddle(rules, pages));
+    }
 }
