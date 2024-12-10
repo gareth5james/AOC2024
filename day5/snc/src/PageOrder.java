@@ -18,7 +18,7 @@ public class PageOrder {
             int result1 = 0;
 
             for (String line: lines)
-                result1 += findMiddle(rules, line);
+                result1 += findMiddle(rules, line, false);
 
             // Part 1
             System.out.println("Part 1: " + result1);
@@ -36,7 +36,7 @@ public class PageOrder {
                 .orElse(-1);
     }
 
-    static Integer findMiddle(String[] rules, String pages) {
+    static Integer findMiddle(String[] rules, String pages, boolean swap) {
         String[] pageNum = pages.split(",");
 
         for (String rule: rules) {
@@ -48,8 +48,13 @@ public class PageOrder {
 
             int index2 = findIndex(ruleNum[1], pageNum);
 
-            if (index2 != -1 && index2 < index1)
-                return 0;
+            if (index2 != -1 && index2 < index1) {
+                if (swap) {
+                    pageNum[index2] = ruleNum[0];
+                    pageNum[index1] = ruleNum[1];
+                }
+                else return 0;
+            }
 
         }
 
