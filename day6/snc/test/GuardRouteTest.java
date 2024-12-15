@@ -19,12 +19,12 @@ public class GuardRouteTest {
     void track2() {
 
         String[] map = new String[] {
-                ">.#",
+                ">#.",
                 "...",
                 "..."
         };
 
-        assertEquals(5, GuardRoute.track(map));
+        assertEquals(3, GuardRoute.track(map));
     }
 
     @Test
@@ -33,9 +33,9 @@ public class GuardRouteTest {
         String[] map = new String[] {
                 ">.#",
                 "...",
-                "..#"
+                ".#."
         };
 
-        assertEquals(7, GuardRoute.track(map));
+        assertEquals(4, GuardRoute.track(map));
     }
 }
