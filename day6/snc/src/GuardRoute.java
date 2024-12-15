@@ -35,16 +35,16 @@ public class GuardRoute {
             int newX = position[0] + directions[position[2]][0];
             int newY = position[1] + directions[position[2]][1];
 
-            System.out.println("MAP:");
-            System.out.println(Arrays.toString(map));
-
             if (newX < 0 || newX >= map.length || newY < 0 || newY >= map[position[0]].length())
                 break;
 
-            if (map[newX].charAt(newY) == '#')
+            char nextPos = map[newX].charAt(newY);
+
+            if (nextPos == '#')
                 position[2] = (position[2] + 1) % 4;
             else {
-                count++;
+                if (nextPos != 'X')
+                    count++;
                 position[0] = newX;
                 position[1] = newY;
             }

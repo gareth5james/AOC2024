@@ -38,4 +38,23 @@ public class GuardRouteTest {
 
         assertEquals(4, GuardRoute.track(map));
     }
+
+    @Test
+    void track4() {
+
+        String[] map = new String[] {
+                "....#.....",
+                ".........#",
+                "..........",
+                "..#.......",
+                ".......#..",
+                "..........",
+                ".#..^.....",
+                "........#.",
+                "#.........",
+                "......#..."
+        };
+
+        assertEquals(41, GuardRoute.track(map));
+    }
 }
