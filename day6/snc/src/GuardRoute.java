@@ -2,8 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.stream.IntStream;
+import java.util.Optional;
 
 public class GuardRoute {
 
@@ -13,18 +12,48 @@ public class GuardRoute {
     public static void main() {
         Path path = Paths.get("day6/snc/input.txt");
 
-
         try {
             String[] lines = Files.readAllLines(path).toArray(new String[0]);
 
             // Part 1
-            int result1 = track(lines);
+            int result1 = Optional.ofNullable(track(lines)).orElse(-1);
             System.out.println("Part 1: " + result1);
 
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    static int obstacle (String[] map) {
+
+        String[] copyMap = map.clone();
+        int d = Optional.ofNullable(track(copyMap)).orElse(-1);
+
+        if (d == -1) return 0;
+
+        int count = 0;
+
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length(); j++) {
+                if (map[i].charAt(j) == '.' && (copyMap[i].charAt(j) == '0' || copyMap[i].charAt(j) == '1' ||
+                        copyMap[i].charAt(j) == '2' || copyMap[i].charAt(j) == '3')) {
+
+                    String[] copyMap2 = map.clone();
+                    StringBuilder line = new StringBuilder(copyMap2[i]);
+                    line.setCharAt(j, '#');
+                    copyMap2[i] = line.toString();
+
+                    int result = Optional.ofNullable(track(copyMap2)).orElse(-1);
+
+                    if (result == -1) count++;
+
+                }
+
+            }
+        }
+
+        return count;
     }
 
     static int[] findPos (String[] map) {
@@ -61,7 +90,7 @@ public class GuardRoute {
                 break;
 
             char nextPos = map[newX].charAt(newY);
-            System.out.println(Arrays.toString(map));
+            //System.out.println(Arrays.toString(map));
 
             if (nextPos == '#')
                 position[2] = (position[2] + 1) % 4;

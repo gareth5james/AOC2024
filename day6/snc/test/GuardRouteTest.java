@@ -77,4 +77,23 @@ public class GuardRouteTest {
 
         assertNull(GuardRoute.track(map));
     }
+
+    @Test
+    void track6() {
+
+        String[] map = new String[] {
+                "....#.....",
+                ".........#",
+                "..........",
+                "..#.......",
+                ".......#..",
+                "..........",
+                ".#..^.....",
+                "........#.",
+                "#.........",
+                "......#..."
+        };
+
+        assertEquals(6, GuardRoute.obstacle(map));
+    }
 }
