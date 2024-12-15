@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class GuardRouteTest {
     @Test
@@ -56,5 +57,24 @@ public class GuardRouteTest {
         };
 
         assertEquals(41, GuardRoute.track(map));
+    }
+
+    @Test
+    void track5() {
+
+        String[] map = new String[] {
+                "....#.....",
+                ".........#",
+                "..........",
+                "..#.......",
+                ".......#..",
+                "..........",
+                ".#.#^.....",
+                "........#.",
+                "#.........",
+                "......#..."
+        };
+
+        assertNull(GuardRoute.track(map));
     }
 }

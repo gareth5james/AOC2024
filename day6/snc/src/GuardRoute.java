@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class GuardRoute {
 
@@ -50,7 +51,7 @@ public class GuardRoute {
         int count = 1;
 
         while (true) {
-            line.setCharAt(position[1], 'X');
+            line.setCharAt(position[1], String.valueOf(position[2]).charAt(0));
             map[position[0]] = line.toString();
 
             int newX = position[0] + directions[position[2]][0];
@@ -60,15 +61,19 @@ public class GuardRoute {
                 break;
 
             char nextPos = map[newX].charAt(newY);
+            System.out.println(Arrays.toString(map));
 
             if (nextPos == '#')
                 position[2] = (position[2] + 1) % 4;
             else {
-                if (nextPos != 'X')
+                if (nextPos != '0' && nextPos != '1' && nextPos != '2' && nextPos != '3')
                     count++;
                 position[0] = newX;
                 position[1] = newY;
             }
+
+            if (String.valueOf(position[2]).charAt(0) == nextPos)
+                return null;
 
             line = new StringBuilder(map[position[0]]);
         }
