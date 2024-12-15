@@ -1,9 +1,30 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class GuardRoute {
 
     private static final int[][] directions = new int[][] {{0,-1}, {-1,0}, {0,1}, {1,0}};
     private static final char[] signs = new char[] {'<','^','>','v'};
+
+    public static void main() {
+        Path path = Paths.get("day6/snc/input.txt");
+
+
+        try {
+            String[] lines = Files.readAllLines(path).toArray(new String[0]);
+
+            // Part 1
+            int result1 = track(lines);
+            System.out.println("Part 1: " + result1);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     static int[] findPos (String[] map) {
 
