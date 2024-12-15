@@ -37,10 +37,12 @@ public class GuardRoute {
             int newX = position[0] + directions[position[2]][0];
             int newY = position[1] + directions[position[2]][1];
 
-            System.out.println(Arrays.toString(map));
+            //System.out.println(Arrays.toString(map));
 
             if (newX < 0 || newX >= map.length || newY < 0 || newY >= map[position[0]].length())
                 break;
+
+            int newDir = (map[newX].charAt(newY) == '#') ? (position[2] + 1) % 4 : position[2];
 
             line = new StringBuilder(map[newX]);
             line.setCharAt(newY, signs[position[2]]);
@@ -48,6 +50,7 @@ public class GuardRoute {
 
             position[0] = newX;
             position[1] = newY;
+            position[2] = newDir;
         }
 
         return count;
