@@ -20,4 +20,28 @@ public class OperatorTest {
         String bridge = "39: 10 19";
         assertEquals(0, Operator.calculate(bridge));
     }
+
+    @Test
+    void calculate4() {
+        String bridge = "56: 10 19 27";
+        assertEquals(56, Operator.calculate(bridge));
+    }
+
+    @Test
+    void calculate5() {
+        String bridge = "3267: 81 40 27";
+        assertEquals(3267, Operator.calculate(bridge));
+    }
+
+    @Test
+    void calculate6() {
+        String bridge = "292: 11 6 16 20";
+        assertEquals(292, Operator.calculate(bridge));
+    }
+
+    @Test
+    void calculate7() {
+        String bridge = "21037: 9 7 18 13";
+        assertEquals(0, Operator.calculate(bridge));
+    }
 }
