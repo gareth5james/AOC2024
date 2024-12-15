@@ -14,4 +14,10 @@ public class OperatorTest {
         String bridge = "29: 10 19";
         assertEquals(29, Operator.calculate(bridge));
     }
+
+    @Test
+    void calculate3() {
+        String bridge = "39: 10 19";
+        assertEquals(0, Operator.calculate(bridge));
+    }
 }
