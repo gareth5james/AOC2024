@@ -14,11 +14,15 @@ public class GuardRoute {
 
         try {
             String[] lines = Files.readAllLines(path).toArray(new String[0]);
+            String[] lines2 = lines.clone();
 
             // Part 1
             int result1 = Optional.ofNullable(track(lines)).orElse(-1);
             System.out.println("Part 1: " + result1);
 
+            // Part 2
+            int result2 = obstacle(lines2);
+            System.out.println("Part 2: " + result2);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -35,9 +39,10 @@ public class GuardRoute {
         int count = 0;
 
         for (int i = 0; i < map.length; i++) {
+
             for (int j = 0; j < map[i].length(); j++) {
-                if (map[i].charAt(j) == '.' && (copyMap[i].charAt(j) == '0' || copyMap[i].charAt(j) == '1' ||
-                        copyMap[i].charAt(j) == '2' || copyMap[i].charAt(j) == '3')) {
+                if (map[i].charAt(j) == '.' && copyMap[i].charAt(j) == 'X') {
+
 
                     String[] copyMap2 = map.clone();
                     StringBuilder line = new StringBuilder(copyMap2[i]);
@@ -46,7 +51,8 @@ public class GuardRoute {
 
                     int result = Optional.ofNullable(track(copyMap2)).orElse(-1);
 
-                    if (result == -1) count++;
+                    if (result == -1)
+                        count++;
 
                 }
 
@@ -79,30 +85,39 @@ public class GuardRoute {
 
         int count = 1;
 
+        boolean[][][] dirs = new boolean[4][map.length][map[0].length()];
+
         while (true) {
-            line.setCharAt(position[1], String.valueOf(position[2]).charAt(0));
+
+            int x = position[0];
+            int y = position[1];
+            int pos = position[2];
+
+            dirs[pos][x][y] = true;
+
+            line.setCharAt(position[1], 'X');
             map[position[0]] = line.toString();
 
-            int newX = position[0] + directions[position[2]][0];
-            int newY = position[1] + directions[position[2]][1];
+            int newX = x + directions[pos][0];
+            int newY = y + directions[pos][1];
 
-            if (newX < 0 || newX >= map.length || newY < 0 || newY >= map[position[0]].length())
+            if (newX < 0 || newX >= map.length || newY < 0 || newY >= map[x].length())
                 break;
 
             char nextPos = map[newX].charAt(newY);
-            //System.out.println(Arrays.toString(map));
 
             if (nextPos == '#')
-                position[2] = (position[2] + 1) % 4;
+                position[2] = (pos + 1) % 4;
             else {
-                if (nextPos != '0' && nextPos != '1' && nextPos != '2' && nextPos != '3')
+                if (dirs[pos][newX][newY])
+                    return null;
+
+                if (nextPos != 'X')
                     count++;
+
                 position[0] = newX;
                 position[1] = newY;
             }
-
-            if (String.valueOf(position[2]).charAt(0) == nextPos)
-                return null;
 
             line = new StringBuilder(map[position[0]]);
         }
