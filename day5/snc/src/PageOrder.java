@@ -16,12 +16,21 @@ public class PageOrder {
             String[] rules = Files.readAllLines(path2).toArray(new String[0]);
 
             int result1 = 0;
+            int result2 = 0;
 
-            for (String line: lines)
-                result1 += findMiddle(rules, line, false);
+            for (String line: lines) {
+                Integer r1 = findMiddle(rules, line, false);
+                result1 += r1;
+
+                if (r1 == 0)
+                    result2 += findMiddle(rules, line, true);
+            }
 
             // Part 1
             System.out.println("Part 1: " + result1);
+
+            // Part 2
+            System.out.println("Part 2: " + result2);
 
 
         } catch (IOException e) {
@@ -37,9 +46,13 @@ public class PageOrder {
     }
 
     static Integer findMiddle(String[] rules, String pages, boolean swap) {
+
         String[] pageNum = pages.split(",");
 
+        boolean reorder = false;
+
         for (String rule: rules) {
+
             String[] ruleNum = rule.split("\\|");
 
             int index1 = findIndex(ruleNum[0], pageNum);
@@ -50,14 +63,15 @@ public class PageOrder {
 
             if (index2 != -1 && index2 < index1) {
                 if (swap) {
-                    pageNum[index2] = ruleNum[0];
+                    reorder = true;
                     pageNum[index1] = ruleNum[1];
+                    pageNum[index2] = ruleNum[0];
                 }
                 else return 0;
             }
-
         }
 
-        return Integer.valueOf(pageNum[pageNum.length / 2]);
+        return (reorder) ? findMiddle(rules, String.join(",", pageNum), true) :
+                Integer.parseInt(pageNum[pageNum.length / 2]);
     }
 }
