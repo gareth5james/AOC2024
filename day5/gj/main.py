@@ -1,4 +1,4 @@
-one, two = open('input.txt').read().split('\n\n')
+one, two = open("input.txt").read().split("\n\n")
 
 order_rules = [[int(num) for num in line.strip().split("|")] for line in one.split("\n")]
 
