@@ -4,11 +4,18 @@ public static void main() {
     try {
         String[] map = Files.readAllLines(path).toArray(new String[0]);
         Antenna myAntenna = new Antenna(map);
+        Antenna myAntenna2 = new Antenna(map);
 
         // Part 1
         myAntenna.createTypes();
         myAntenna.signal();
         System.out.println("Part 1: " + myAntenna.signalCount);
+
+        // Part 2
+        myAntenna2.createTypes();
+        myAntenna2.resonant = true;
+        myAntenna2.signal();
+        System.out.println("Part 2: " + myAntenna2.signalCount);
 
 
     } catch (IOException e) {

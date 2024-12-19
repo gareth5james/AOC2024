@@ -138,6 +138,54 @@ public class AntennaTest {
         testAntenna.createTypes();
         testAntenna.signal();
 
-        assertEquals(3, testAntenna.signalCount);
+        assertEquals(5, testAntenna.signalCount);
+    }
+
+    @Test
+    void getSignalsContinue2() {
+        String[] map = new String[] {
+                "T.........",
+                "...T......",
+                ".T........",
+                "..........",
+                "..........",
+                "..........",
+                "..........",
+                "..........",
+                "..........",
+                ".........."
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.resonant = true;
+        testAntenna.createTypes();
+        testAntenna.signal();
+
+        assertEquals(9, testAntenna.signalCount);
+    }
+
+    @Test
+    void getSignalsContinue3() {
+        String[] map = new String[] {
+                "............",
+                "........0...",
+                ".....0......",
+                ".......0....",
+                "....0.......",
+                "......A.....",
+                "............",
+                "............",
+                "........A...",
+                ".........A..",
+                "............",
+                "............"
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.resonant = true;
+        testAntenna.createTypes();
+        testAntenna.signal();
+
+        assertEquals(34, testAntenna.signalCount);
     }
 }

@@ -57,6 +57,11 @@ public class Antenna {
                         coordinates[j][0] = x;
                         coordinates[j][1] = y;
                         j++;
+
+                        if (resonant && !signalFound[y][x]) {
+                            signalCount++;
+                            signalFound[y][x] = true;
+                        }
                     }
                 }
             }
@@ -70,8 +75,6 @@ public class Antenna {
                     addValue(coordinates[b][0] + diffX, coordinates[b][1] + diffY, diffX, diffY);
                 }
             }
-
-
         }
     }
 }
