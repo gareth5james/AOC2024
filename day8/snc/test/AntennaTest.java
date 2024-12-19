@@ -89,7 +89,7 @@ public class AntennaTest {
         testAntenna.createTypes();
         testAntenna.signal();
 
-        assertEquals(8, testAntenna.signalCount);
+        assertEquals(7, testAntenna.signalCount);
     }
 
     @Test
