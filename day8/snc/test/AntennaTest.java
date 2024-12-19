@@ -22,4 +22,39 @@ public class AntennaTest {
         assertTrue(testAntenna.types.contains("y"));
         assertEquals(2, testAntenna.types.length());
     }
+
+    @Test
+    void getCounts() {
+        String[] map = new String[] {
+                ".....",
+                "..x..",
+                "..x..",
+                ".....",
+                "...yy"
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.createTypes();
+
+        assertEquals(2, testAntenna.counts.length);
+        assertEquals(2, testAntenna.counts[0]);
+        assertEquals(2, testAntenna.counts[1]);
+    }
+
+    @Test
+    void getSignals() {
+        String[] map = new String[] {
+                ".....",
+                "..x..",
+                "..x..",
+                ".....",
+                "....."
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.createTypes();
+        testAntenna.signal();
+
+        assertEquals(2, testAntenna.signalCount);
+    }
 }
