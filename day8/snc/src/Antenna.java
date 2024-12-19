@@ -3,6 +3,8 @@ public class Antenna {
     public String[] map;
     public Integer[] counts;
     public Integer signalCount;
+    public boolean resonant = false;
+    private boolean[][] signalFound;
 
     public Antenna (String[] initMap) {
         map = initMap;
@@ -26,8 +28,23 @@ public class Antenna {
 
     }
 
+    public void addValue (int stepX, int stepY, int diffX, int diffY) {
+        while (stepX >= 0 && stepX < map[0].length() && stepY >= 0 && stepY < map.length) {
+            if (!signalFound[stepY][stepX]) {
+                signalCount++;
+                signalFound[stepY][stepX] = true;
+            }
+
+            if (resonant) {
+                stepX += diffX;
+                stepY += diffY;
+            }
+            else break;
+        }
+    }
+
     public void signal() {
-        boolean[][] signalFound = new boolean[map.length][map[0].length()];
+        signalFound = new boolean[map.length][map[0].length()];
 
         for (int i = 0; i < types.length(); i++) {
             Integer[][] coordinates = new Integer[counts[i]][2];
@@ -49,21 +66,8 @@ public class Antenna {
                     Integer diffX = coordinates[b][0] - coordinates[a][0];
                     Integer diffY = coordinates[b][1] - coordinates[a][1];
 
-                    int step1X = coordinates[a][0] - diffX;
-                    int step1Y = coordinates[a][1] - diffY;
-
-                    int step2X = coordinates[b][0] + diffX;
-                    int step2Y = coordinates[b][1] + diffY;
-
-                    if (step1X >= 0 && step1X < map[0].length() && step1Y >= 0 && step1Y < map.length && !signalFound[step1Y][step1X]) {
-                        signalCount++;
-                        signalFound[step1Y][step1X] = true;
-                    }
-
-                    if (step2X >= 0 && step2X < map[0].length() && step2Y >= 0 && step2Y < map.length && !signalFound[step2Y][step2X]) {
-                        signalCount++;
-                        signalFound[step2Y][step2X] = true;
-                    }
+                    addValue(coordinates[a][0] - diffX, coordinates[a][1] - diffY, -diffX, -diffY);
+                    addValue(coordinates[b][0] + diffX, coordinates[b][1] + diffY, diffX, diffY);
                 }
             }
 

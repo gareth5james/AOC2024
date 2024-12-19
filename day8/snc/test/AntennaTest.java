@@ -122,4 +122,22 @@ public class AntennaTest {
 
         assertEquals(2, testAntenna.signalCount);
     }
+
+    @Test
+    void getSignalsContinue() {
+        String[] map = new String[] {
+                ".....",
+                "..x..",
+                "..x..",
+                ".....",
+                "....."
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.resonant = true;
+        testAntenna.createTypes();
+        testAntenna.signal();
+
+        assertEquals(3, testAntenna.signalCount);
+    }
 }
