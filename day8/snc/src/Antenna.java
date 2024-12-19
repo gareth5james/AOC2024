@@ -27,6 +27,8 @@ public class Antenna {
     }
 
     public void signal() {
+        boolean[][] signalFound = new boolean[map.length][map[0].length()];
+
         for (int i = 0; i < types.length(); i++) {
             Integer[][] coordinates = new Integer[counts[i]][2];
 
@@ -53,11 +55,15 @@ public class Antenna {
                     int step2X = coordinates[b][0] + diffX;
                     int step2Y = coordinates[b][1] + diffY;
 
-                    if (step1X >= 0 && step1X < map[0].length() && step1Y >= 0 && step1Y < map.length)
+                    if (step1X >= 0 && step1X < map[0].length() && step1Y >= 0 && step1Y < map.length && !signalFound[step1X][step1Y]) {
                         signalCount++;
+                        signalFound[step1X][step1Y] = true;
+                    }
 
-                    if (step2X >= 0 && step2X < map[0].length() && step2Y >= 0 && step2Y < map.length)
+                    if (step2X >= 0 && step2X < map[0].length() && step2Y >= 0 && step2Y < map.length && !signalFound[step2X][step2Y]) {
                         signalCount++;
+                        signalFound[step2X][step2Y] = true;
+                    }
                 }
             }
 

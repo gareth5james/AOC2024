@@ -74,4 +74,38 @@ public class AntennaTest {
 
         assertEquals(3, testAntenna.signalCount);
     }
+
+    @Test
+    void getSignalsMore() {
+        String[] map = new String[] {
+                ".....",
+                "..x..",
+                "..x..",
+                ".yy..",
+                "..y.y"
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.createTypes();
+        testAntenna.signal();
+
+        assertEquals(8, testAntenna.signalCount);
+    }
+
+    @Test
+    void getSignalsDuplicates() {
+        String[] map = new String[] {
+                ".....",
+                "..x..",
+                "..x..",
+                "...yy",
+                "....."
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.createTypes();
+        testAntenna.signal();
+
+        assertEquals(2, testAntenna.signalCount);
+    }
 }
