@@ -108,4 +108,18 @@ public class AntennaTest {
 
         assertEquals(2, testAntenna.signalCount);
     }
+
+    @Test
+    void getSignalsNonSquare() {
+        String[] map = new String[] {
+                "..xx.",
+                "..x.."
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.createTypes();
+        testAntenna.signal();
+
+        assertEquals(2, testAntenna.signalCount);
+    }
 }

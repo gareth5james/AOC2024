@@ -55,14 +55,14 @@ public class Antenna {
                     int step2X = coordinates[b][0] + diffX;
                     int step2Y = coordinates[b][1] + diffY;
 
-                    if (step1X >= 0 && step1X < map[0].length() && step1Y >= 0 && step1Y < map.length && !signalFound[step1X][step1Y]) {
+                    if (step1X >= 0 && step1X < map[0].length() && step1Y >= 0 && step1Y < map.length && !signalFound[step1Y][step1X]) {
                         signalCount++;
-                        signalFound[step1X][step1Y] = true;
+                        signalFound[step1Y][step1X] = true;
                     }
 
-                    if (step2X >= 0 && step2X < map[0].length() && step2Y >= 0 && step2Y < map.length && !signalFound[step2X][step2Y]) {
+                    if (step2X >= 0 && step2X < map[0].length() && step2Y >= 0 && step2Y < map.length && !signalFound[step2Y][step2X]) {
                         signalCount++;
-                        signalFound[step2X][step2Y] = true;
+                        signalFound[step2Y][step2X] = true;
                     }
                 }
             }
