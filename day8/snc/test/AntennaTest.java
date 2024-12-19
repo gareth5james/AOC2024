@@ -57,4 +57,21 @@ public class AntennaTest {
 
         assertEquals(2, testAntenna.signalCount);
     }
+
+    @Test
+    void getSignalsOutsideMap() {
+        String[] map = new String[] {
+                ".....",
+                "..x..",
+                "..x..",
+                "..y..",
+                "....y"
+        };
+
+        Antenna testAntenna = new Antenna(map);
+        testAntenna.createTypes();
+        testAntenna.signal();
+
+        assertEquals(3, testAntenna.signalCount);
+    }
 }
